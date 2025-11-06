@@ -58,65 +58,68 @@ export default function Home() {
 
   const menuCategories = [
     {
-      name: "Pizza",
+      name: "Pizzas",
       description: "Hand-tossed pies baked on stone decks with locally sourced ingredients.",
       items: [
         {
-          title: "Classic Pepperoni",
+          title: "Cheese",
           detail: "House marinara, mozzarella, and a generous layer of crispy pepperoni.",
           image: "https://images.unsplash.com/photo-1601925260184-8d0e01c6fc33?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$12", medium: "$16", large: "$20" },
         },
         {
-          title: "Veggie Garden",
+          title: "Pepperoni",
           detail: "Roasted peppers, baby spinach, artichokes, olives, and balsamic drizzle.",
           image: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$13", medium: "$17", large: "$21" },
         },
         {
-          title: "Four Cheese",
+          title: "Margherita",
           detail: "Mozzarella, fontina, aged provolone, and parmigiano with garlic butter.",
           image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$13", medium: "$18", large: "$22" },
+        },
+                {
+          title: "Sausage",
+          detail: "House marinara, mozzarella, and a generous layer of crispy pepperoni.",
+          image: "https://images.unsplash.com/photo-1601925260184-8d0e01c6fc33?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$12", medium: "$16", large: "$20" },
+        },
+        {
+          title: "Hawian",
+          detail: "Roasted peppers, baby spinach, artichokes, olives, and balsamic drizzle.",
+          image: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$13", medium: "$17", large: "$21" },
+        },
+        {
+          title: "White Pizza",
+          detail: "Mozzarella, fontina, aged provolone, and parmigiano with garlic butter.",
+          image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$13", medium: "$18", large: "$22" },
         },
       ],
     },
     {
-      name: "Specialty Pizza",
+      name: "Specialty Pizzas",
       description: "Toasted Italian rolls stacked with premium meats, cheeses, and sauces.",
       items: [
         {
           title: "Italian Stallion",
           detail: "Capicola, salami, prosciutto, provolone, lettuce, tomato, red wine vinaigrette.",
           image: "https://images.unsplash.com/photo-1542838686-5f1c068ededd?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$14", medium: "$18", large: "$23" },
         },
         {
           title: "Chicken Parm Hero",
           detail: "Crispy chicken cutlet, marinara, mozzarella, and fresh basil.",
           image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$13", medium: "$17", large: "$22" },
         },
         {
           title: "Roasted Veggie",
           detail: "Zucchini, squash, portobello, pesto aioli, arugula, and smoked gouda.",
           image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80",
-        },
-      ],
-    },
-    {
-      name: "Desserts",
-      description: "Toasted Italian rolls stacked with premium meats, cheeses, and sauces.",
-      items: [
-        {
-          title: "Italian Stallion",
-          detail: "Capicola, salami, prosciutto, provolone, lettuce, tomato, red wine vinaigrette.",
-          image: "https://images.unsplash.com/photo-1542838686-5f1c068ededd?auto=format&fit=crop&w=800&q=80",
-        },
-        {
-          title: "Chicken Parm Hero",
-          detail: "Crispy chicken cutlet, marinara, mozzarella, and fresh basil.",
-          image: "https://images.unsplash.com/photo-1612874742237-6526221588e3?auto=format&fit=crop&w=800&q=80",
-        },
-        {
-          title: "Roasted Veggie",
-          detail: "Zucchini, squash, portobello, pesto aioli, arugula, and smoked gouda.",
-          image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$13", medium: "$17", large: "$21" },
         },
       ],
     },
@@ -128,22 +131,28 @@ export default function Home() {
           title: "Tiramisu Cups",
           detail: "Espresso-soaked ladyfingers with whipped mascarpone and cocoa.",
           image: "https://images.unsplash.com/photo-1604908177067-088a29cf5c3f?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$5", medium: "$7", large: "$9" },
         },
         {
           title: "Cannoli Flight",
           detail: "Mini cannoli trio with pistachio, chocolate chip, and citrus ricotta fillings.",
           image: "https://images.unsplash.com/photo-1589308078056-922f584ef167?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$6", medium: "$8", large: "$10" },
         },
         {
           title: "Fired Apple Pie",
           detail: "Wood-oven baked apples, cinnamon crumble, vanilla bean gelato.",
           image: "https://images.unsplash.com/photo-1605478371310-a9bf09f0b1c3?auto=format&fit=crop&w=800&q=80",
+          prices: { small: "$6", medium: "$9", large: "$11" },
         },
       ],
     },
   ];
 
   const activeMenu = menuCategories.find((category) => category.name === activeCategory) ?? menuCategories[0];
+  const uniqueMenuItems = activeMenu.items.filter(
+    (item, index, array) => array.findIndex(({ title }) => title === item.title) === index,
+  );
 
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-br from-amber-50 via-white to-rose-50 font-sans text-zinc-700">
@@ -401,7 +410,7 @@ export default function Home() {
               </div>
             </div>
             <div className="grid gap-10 md:grid-cols-[1.1fr,0.9fr] md:items-center">
-              <div className="space-y-6">
+              <div className="flex min-h-[380px] flex-col gap-6 md:min-h-[420px]">
                 <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-amber-200/80">
                   <span className="inline-flex h-1.5 w-1.5 rounded-full bg-amber-300" />
                   Special {currentSpecial + 1} of {specials.length}
@@ -409,7 +418,7 @@ export default function Home() {
                 <h4 className="text-3xl font-semibold md:text-4xl">{currentSpecialItem.title}</h4>
                 <p className="text-lg text-white/85">{currentSpecialItem.description}</p>
                 {currentSpecialItem.ingredients && (
-                  <ul className="flex flex-wrap gap-2 text-sm text-white/75">
+                  <ul className="flex min-h-[80px] flex-wrap gap-2 text-sm text-white/75">
                     {currentSpecialItem.ingredients.map((ingredient) => (
                       <li
                         className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1"
@@ -421,7 +430,7 @@ export default function Home() {
                     ))}
                   </ul>
                 )}
-                <div className="flex items-center gap-3 md:hidden">
+                <div className="mt-auto flex items-center gap-3 md:hidden">
                   <button
                     aria-label="View previous special"
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 shadow-lg shadow-black/20 transition hover:scale-105 hover:border-amber-300/70 hover:bg-white/20"
@@ -493,7 +502,7 @@ export default function Home() {
             <div className="grid gap-8 md:grid-cols-[1.15fr,0.85fr] md:items-start">
               <div className="space-y-6">
                 <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {activeMenu.items.map((item) => (
+                  {uniqueMenuItems.map((item) => (
                     <li
                       key={item.title}
                       className="group overflow-hidden rounded-3xl border border-orange-200/70 bg-white/90 shadow-lg transition-all duration-200 hover:-translate-y-1 hover:shadow-2xl"
@@ -509,6 +518,13 @@ export default function Home() {
                       <div className="space-y-2 p-4">
                         <h5 className="text-lg font-semibold text-zinc-900">{item.title}</h5>
                         <p className="text-sm text-zinc-600">{item.detail}</p>
+                        {item.prices && (
+                          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm font-semibold text-black">
+                            <span>Small {item.prices.small}</span>
+                            <span>Medium {item.prices.medium}</span>
+                            <span>Large {item.prices.large}</span>
+                          </div>
+                        )}
                       </div>
                     </li>
                   ))}
@@ -522,7 +538,6 @@ export default function Home() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(244,143,177,0.25),transparent_55%)]" />
           <div className="relative mx-auto w-full max-w-6xl space-y-12">
             <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-600">Visit</p>
               <h3 className="mt-3 text-3xl font-semibold text-zinc-900 md:text-4xl">Visit Slice Station</h3>
               <div className="mt-4 space-y-2 text-sm text-zinc-600 md:text-base">
                 <p className="font-semibold text-zinc-900">123 Market Street, Fort Myers, FL 33901</p>
